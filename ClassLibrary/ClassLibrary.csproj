@@ -4,4 +4,12 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\Zealand\Programming\ticketsystem-Zentarg\ClassLibrary\ClassLibrary.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\Zealand\Programming\ticketsystem-Zentarg\ClassLibrary\ClassLibrary.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>

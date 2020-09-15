@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ClassLibrary</name>
+    </assembly>
+    <members>
+        <member name="M:ClassLibrary.Car.#ctor(System.String,System.DateTime,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:ClassLibrary.MC.#ctor(System.String,System.DateTime,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:ClassLibrary.Vehicle.#ctor(System.String,System.DateTime,System.Boolean)">
+             <summary>
+            
+             </summary>
+             <param name="licensePlate">License plate of vehicle.</param>
+             <param name="date">Date of ticket.</param>
+             <param name="brobizzPresent">Whether or not the vehicle has a Brobizz allocated.</param>
+        </member>
+        <member name="M:ClassLibrary.Vehicle.#ctor">
+            <summary>
+            Default constructor for Vehicle. Sets all properties to default values.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Vehicle.LicensePlate">
+            <summary>
+            License plate of the car.
+            </summary>
+            <exception cref="T:System.ArgumentException">Throws an argument exception if length is longer than 7.</exception>
+        </member>
+        <member name="P:ClassLibrary.Vehicle.Date">
+            <summary>
+            Date of the ticket.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Vehicle.BrobizzPresent">
+            <summary>
+            Boolean describing whether or not the vehicle has a Brobizz allocated.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.Vehicle.Price">
+            <summary>
+            Returns the ticket price.
+            </summary>
+            <returns>The price in type <see cref="T:System.Double"/>.</returns>
+        </member>
+        <member name="M:ClassLibrary.Vehicle.VehicleType">
+            <summary>
+            Returns the vehicle type.
+            </summary>
+            <returns>The Vehicle Type in type <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="M:ClassLibrary.Vehicle.PriceAfterBrobizzDiscount">
+            <summary>
+            Returns the ticket price after BrobizzDiscount.
+            </summary>
+            <returns>The ticket price after BrobizzDiscount in type <see cref="T:System.Double"/>.</returns>
+        </member>
+    </members>
+</doc>
