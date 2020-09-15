@@ -57,5 +57,34 @@ namespace ClassLibraryUnitTesting
             //Assert
             Assert.AreEqual("M C", vehicleType);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestCarLicensePlateLengthOver7()
+        {
+            //Arrange
+            MC mc = new MC("WA123456", DateTime.Now);
+
+            //Act
+            string vehicleType = mc.VehicleType();
+
+            //Assert
+            Assert.AreEqual("M C", vehicleType);
+        }
+
+        [TestMethod]
+        public void TestCarLicensePlateLengthAt7()
+        {
+            //Arrange
+            MC mc = new MC("WA12345", DateTime.Now);
+
+            //Act
+            string vehicleType = mc.VehicleType();
+
+            //Assert
+            Assert.AreEqual("M C", vehicleType);
+        }
+
+
     }
 }

@@ -17,10 +17,24 @@ namespace ClassLibrary
             Date = date;
         }
 
+
+
+
         /// <summary>
         /// License plate of the car.
         /// </summary>
-        public string LicensePlate { get; set; }
+        /// <exception cref="ArgumentException">Throws an argument exception if length is longer than 7.</exception>
+        public string LicensePlate
+        {
+            get { return _licensePlate; }
+            set
+            {
+                if (value.Length > 7)
+                    throw new ArgumentOutOfRangeException(nameof(LicensePlate), "LicensePlate cannot be longer than 7 characters.");
+                _licensePlate = value;
+            }
+        }
+        private string _licensePlate;
 
         /// <summary>
         /// Date of the ticket.
