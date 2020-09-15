@@ -31,5 +31,31 @@ namespace ClassLibraryUnitTesting
             //Assert
             Assert.AreEqual("Car", vehicleType);
         }
+
+        [TestMethod]
+        public void TestMCPrice()
+        {
+            //Arrange
+            MC mc = new MC();
+
+            //Act
+            double price = mc.Price();
+
+            //Assert
+            Assert.AreEqual(125, price);
+        }
+
+        [TestMethod]
+        public void TestMCVehicle()
+        {
+            //Arrange
+            MC mc = new MC();
+
+            //Act
+            string vehicleType = mc.Vehicle();
+
+            //Assert
+            Assert.AreEqual("M C", vehicleType);
+        }
     }
 }
