@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{68DCEA9D-2012-4E55-BC6C-7F5B0A18C7D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraryUnitTesting", "ClassLibraryUnitTesting\ClassLibraryUnitTesting.csproj", "{D651AC4F-041C-4EFC-AF4E-2535DEC31D42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibraryUnitTesting", "ClassLibraryUnitTesting\ClassLibraryUnitTesting.csproj", "{D651AC4F-041C-4EFC-AF4E-2535DEC31D42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreBaeltTicketLibrary", "StoreBaeltTicketLibrary\StoreBaeltTicketLibrary.csproj", "{5C0EC255-25E7-45E1-8D4C-ACBFC2E0DE72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D651AC4F-041C-4EFC-AF4E-2535DEC31D42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D651AC4F-041C-4EFC-AF4E-2535DEC31D42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D651AC4F-041C-4EFC-AF4E-2535DEC31D42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C0EC255-25E7-45E1-8D4C-ACBFC2E0DE72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C0EC255-25E7-45E1-8D4C-ACBFC2E0DE72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C0EC255-25E7-45E1-8D4C-ACBFC2E0DE72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C0EC255-25E7-45E1-8D4C-ACBFC2E0DE72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
