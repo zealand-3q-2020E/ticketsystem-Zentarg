@@ -4,35 +4,17 @@ using System.Text;
 
 namespace ClassLibrary
 {
-    /// <summary>
-    /// Car vehicle class.
-    /// </summary>
-    public class Car
+    public class Car : Vehicle
     {
-        /// <summary>
-        /// License plate of the car.
-        /// </summary>
-        public string Licenseplate { get; set; }
+        /// <inheritdoc />
+        public Car(string licensePlate, DateTime date) : base(licensePlate, date){}
 
-        /// <summary>
-        /// Date of the ticket.
-        /// </summary>
-        public DateTime Date { get; set; }
-
-        /// <summary>
-        /// Returns the vehicle type.
-        /// </summary>
-        /// <returns>string</returns>
-        public string VehicleType()
+        public override string VehicleType()
         {
             return "Car";
         }
 
-        /// <summary>
-        /// Returns the ticket price.
-        /// </summary>
-        /// <returns>double</returns>
-        public double Price()
+        public override double Price()
         {
             return 240;
         }

@@ -1,3 +1,4 @@
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ClassLibrary;
 
@@ -10,7 +11,7 @@ namespace ClassLibraryUnitTesting
         public void TestCarPrice()
         {
             //Arrange
-            Car car = new Car();
+            Car car = new Car("WA12343", DateTime.Now);
 
             //Act
             double price = car.Price();
@@ -23,8 +24,7 @@ namespace ClassLibraryUnitTesting
         public void TestCarVehicleType()
         {
             //Arrange
-            Car car = new Car();
-
+            Car car = new Car("WA12343", DateTime.Now);
             //Act
             string vehicleType = car.VehicleType();
 
@@ -36,7 +36,7 @@ namespace ClassLibraryUnitTesting
         public void TestMCPrice()
         {
             //Arrange
-            MC mc = new MC();
+            MC mc = new MC("WA98765", DateTime.Now);
 
             //Act
             double price = mc.Price();
@@ -49,10 +49,10 @@ namespace ClassLibraryUnitTesting
         public void TestMCVehicle()
         {
             //Arrange
-            MC mc = new MC();
+            MC mc = new MC("WA98765", DateTime.Now);
 
             //Act
-            string vehicleType = mc.Vehicle();
+            string vehicleType = mc.VehicleType();
 
             //Assert
             Assert.AreEqual("M C", vehicleType);

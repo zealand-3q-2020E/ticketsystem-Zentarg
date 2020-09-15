@@ -4,38 +4,20 @@ using System.Text;
 
 namespace ClassLibrary
 {
-    public class MC
+    public class MC : Vehicle
     {
+        /// <inheritdoc />
+        public MC(string licensePlate, DateTime date) : base(licensePlate, date){}
 
-        /// <summary>
-        /// License plate of the car.
-        /// </summary>
-        public string Licenseplate { get; set; }
-
-        /// <summary>
-        /// Date of the ticket.
-        /// </summary>
-        public DateTime Date { get; set; }
-
-        /// <summary>
-        /// Returns the ticket price.
-        /// </summary>
-        /// <returns>double</returns>
-        public double Price()
-        {
-            return 125;
-        }
-
-        /// <summary>
-        /// Returns the vehicle type.
-        /// </summary>
-        /// <returns>string</returns>
-        public string Vehicle()
+        public override string VehicleType()
         {
             return "M C";
         }
 
-
+        public override double Price()
+        {
+            return 125;
+        }
 
     }
 }
