@@ -7,7 +7,7 @@ namespace ClassLibrary
     public class MC : Vehicle
     {
         /// <inheritdoc />
-        public MC(string licensePlate, DateTime date) : base(licensePlate, date){}
+        public MC(string licensePlate, DateTime date, bool brobizzPresent) : base(licensePlate, date, brobizzPresent) {}
 
         public override string VehicleType()
         {
