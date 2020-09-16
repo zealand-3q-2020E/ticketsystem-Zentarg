@@ -5,7 +5,7 @@ using ClassLibrary;
 namespace ClassLibraryUnitTesting
 {
     [TestClass]
-    public class UnitTest1
+    public class ClassLibraryUnitTest
     {
         [TestMethod]
         public void TestCarPrice()
