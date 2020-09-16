@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ClassLibrary;
+using StoreBaeltTicketLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ClassLibraryUnitTesting
