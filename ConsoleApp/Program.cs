@@ -55,10 +55,13 @@ namespace ConsoleApp
             MainScreen();
         }
 
+        /// <summary>
+        /// Initializes the Main Menu.
+        /// </summary>
         static void MainScreen()
         {
             string choice = "";
-            CycleChoicesList(MainChoicesList, 0, "Welcome, customer. Please select an option below: ");
+            InitChoicesList(MainChoicesList, "Welcome, customer. Please select an option below: ");
 
             while (true)
             {
@@ -66,9 +69,9 @@ namespace ConsoleApp
                 if (key == ConsoleKey.Enter)
                     break;
                 if (key == ConsoleKey.DownArrow)
-                    CycleChoicesList(MainChoicesList, 1, "Welcome, customer. Please select an option below: ");
+                    CycleChoicesList(MainChoicesList, 1);
                 else if (key == ConsoleKey.UpArrow)
-                    CycleChoicesList(MainChoicesList, -1, "Welcome, customer. Please select an option below: ");
+                    CycleChoicesList(MainChoicesList, -1);
             }
 
             foreach (KeyValuePair<string, bool> item in MainChoicesList)
@@ -96,6 +99,9 @@ namespace ConsoleApp
             }
         }
 
+        /// <summary>
+        /// Initializes the Buy Ticket selection in the main menu.
+        /// </summary>
         static void BuyTicket()
         {
             string ticketChoice = "";
@@ -103,7 +109,7 @@ namespace ConsoleApp
             DateTime date = DateTime.Now;
             string licensePlate = "12345678";
             bool brobizz;
-            CycleChoicesList(TicketChoicesList, 0, "Please select the ticket you would like to buy: ");
+            InitChoicesList(TicketChoicesList, "Please select the ticket you would like to buy: ");
 
             while (true)
             {
@@ -111,9 +117,9 @@ namespace ConsoleApp
                 if (key == ConsoleKey.Enter)
                     break;
                 if (key == ConsoleKey.DownArrow)
-                    CycleChoicesList(TicketChoicesList, 1, "Please select the ticket you would like to buy: ");
+                    CycleChoicesList(TicketChoicesList, 1);
                 else if (key == ConsoleKey.UpArrow)
-                    CycleChoicesList(TicketChoicesList, -1, "Please select the ticket you would like to buy: ");
+                    CycleChoicesList(TicketChoicesList, -1);
             }
 
             foreach (KeyValuePair<string, bool> item in TicketChoicesList)
@@ -123,7 +129,7 @@ namespace ConsoleApp
             }
 
 
-            CycleChoicesList(VehicleChoicesList, 0, "Please select the vehicle you would like to buy a ticket for: ");
+            InitChoicesList(VehicleChoicesList, "Please select the vehicle you would like to buy a ticket for: ");
 
             while (true)
             {
@@ -131,9 +137,9 @@ namespace ConsoleApp
                 if (key == ConsoleKey.Enter)
                     break;
                 if (key == ConsoleKey.DownArrow)
-                    CycleChoicesList(VehicleChoicesList, 1, "Please select the vehicle you would like to buy a ticket for: ");
+                    CycleChoicesList(VehicleChoicesList, 1);
                 else if (key == ConsoleKey.UpArrow)
-                    CycleChoicesList(VehicleChoicesList, -1, "Please select the vehicle you would like to buy a ticket for: ");
+                    CycleChoicesList(VehicleChoicesList, -1);
             }
 
             foreach (KeyValuePair<string, bool> item in VehicleChoicesList)
@@ -223,6 +229,10 @@ namespace ConsoleApp
             MainScreen();
         }
 
+        /// <summary>
+        /// Converts string to date.
+        /// </summary>
+        /// <returns>Returns a date specified by string.</returns>
         static DateTime GetDate()
         {
             Console.WriteLine("Please enter the date. Example: yyyy/mm/dd");
@@ -280,6 +290,9 @@ namespace ConsoleApp
             return new DateTime(int.Parse(dateStringSplit[0]), int.Parse(dateStringSplit[1]), int.Parse(dateStringSplit[2]));
         }
 
+        /// <summary>
+        /// Initializes the List Purchases option in the main menu.
+        /// </summary>
         static void ListPurchases()
         {
 
@@ -300,6 +313,9 @@ namespace ConsoleApp
             MainScreen();
         }
 
+        /// <summary>
+        /// Initializes the Sum of Purchases option in the main menu.
+        /// </summary>
         static void SumPurchases()
         {
             double sum = 0;
@@ -319,20 +335,23 @@ namespace ConsoleApp
             MainScreen();
         }
 
+        /// <summary>
+        /// Initializes the Change Currency option in the main menu. 
+        /// </summary>
         static void ChangeCurrency()
         {
             Console.WriteLine("\r\n Getting currencies, please wait...");
             GetCurrencies();
-            CycleChoicesList(CurrencyChoicesList, 0, "Please choose your desired currency:");
+            InitChoicesList(CurrencyChoicesList, "Please choose your desired currency:");
             while (true)
             {
                 ConsoleKey key = Console.ReadKey().Key;
                 if (key == ConsoleKey.Enter)
                     break;
                 if (key == ConsoleKey.DownArrow)
-                    CycleChoicesList(CurrencyChoicesList, 1, "Please choose your desired currency: ");
+                    CycleChoicesList(CurrencyChoicesList, 1);
                 else if (key == ConsoleKey.UpArrow)
-                    CycleChoicesList(CurrencyChoicesList, -1, "Please choose your desired currency: ");
+                    CycleChoicesList(CurrencyChoicesList, -1);
             }
 
             foreach (KeyValuePair<string, bool> pair in CurrencyChoicesList)
@@ -350,27 +369,16 @@ namespace ConsoleApp
 
         }
 
-        static void CycleChoicesList(List<KeyValuePair<string, bool>> list, int direction, string messageToSendBeforeList)
+        
+        /// <summary>
+        /// Initializes the choices list, clearing the screen and posting every option in the list.
+        /// </summary>
+        /// <param name="list">Choices List to show.</param>
+        /// <param name="direction"></param>
+        /// <param name="messageToSendBeforeList">Message before choices list is written to console.</param>
+        static void InitChoicesList(List<KeyValuePair<string, bool>> list, string messageToSendBeforeList)
         {
             Console.Clear();
-            if (direction != 0)
-            {
-                int currentChosenIndex = list.FindIndex(i => i.Value);
-                list[currentChosenIndex] = new KeyValuePair<string, bool>(list[currentChosenIndex].Key, false);
-                if (direction == -1)
-                {
-                    if (currentChosenIndex - 1 < 0)
-                        currentChosenIndex = list.Count;
-                    list[currentChosenIndex - 1] = new KeyValuePair<string, bool>(list[currentChosenIndex - 1].Key, true);
-                }
-                else if (direction == 1)
-                {
-                    if (currentChosenIndex + 1 == list.Count)
-                        currentChosenIndex = -1;
-                    list[currentChosenIndex + 1] = new KeyValuePair<string, bool>(list[currentChosenIndex + 1].Key, true);
-                }
-            }
-
             Console.WriteLine(messageToSendBeforeList);
             foreach (KeyValuePair<string, bool> item in list)
             {
@@ -379,9 +387,79 @@ namespace ConsoleApp
                 else
                     Console.WriteLine($"  {item.Key}");
             }
+        }
+
+        /// <summary>
+        /// Cycles the selector through the list specified.
+        /// </summary>
+        /// <param name="list">The choices list to cycle through</param>
+        /// <param name="direction">The direction to cycle. -1 for up, 1 for down.</param>
+        static void CycleChoicesList(List<KeyValuePair<string, bool>> list, int direction)
+        {
+            int origX = Console.CursorLeft;
+            int origY = Console.CursorTop;
+
+
+
+            int currentChosenIndex = list.FindIndex(i => i.Value);
+            list[currentChosenIndex] = new KeyValuePair<string, bool>(list[currentChosenIndex].Key, false);
+
+            if (direction == -1)
+            {
+                //Go Up
+                if (currentChosenIndex - 1 < 0)
+                {
+                    currentChosenIndex = list.Count - 1;
+                    list[currentChosenIndex] = new KeyValuePair<string, bool>(list[currentChosenIndex].Key, true);
+                    Console.SetCursorPosition(1, origY - list.Count);
+                    Console.Write("\b ");
+                    Console.SetCursorPosition(1, origY - 1);
+                    Console.Write("\b>");
+                }
+                else
+                {
+                    currentChosenIndex--;
+                    list[currentChosenIndex] = new KeyValuePair<string, bool>(list[currentChosenIndex].Key, true);
+                    Console.SetCursorPosition(1, origY - (origY - currentChosenIndex) + 2 );
+                    Console.Write("\b ");
+                    Console.SetCursorPosition(1, origY - (origY - currentChosenIndex) + 1);
+                    Console.Write("\b>");
+
+                }
+
+
+            } else if (direction == 1)
+            {
+                //Go down
+                if (currentChosenIndex + 1 == list.Count)
+                {
+                    currentChosenIndex = 0;
+                    list[currentChosenIndex] = new KeyValuePair<string, bool>(list[currentChosenIndex].Key, true);
+                    Console.SetCursorPosition(1, origY - 1);
+                    Console.Write("\b ");
+                    Console.SetCursorPosition(1, origY - list.Count);
+                    Console.Write("\b>");
+                }
+                else
+                {
+                    currentChosenIndex++;
+                    list[currentChosenIndex] = new KeyValuePair<string, bool>(list[currentChosenIndex].Key, true);
+                    Console.SetCursorPosition(1, origY - (origY - currentChosenIndex));
+                    Console.Write("\b ");
+                    Console.SetCursorPosition(1, origY - (origY - currentChosenIndex) + 1);
+                    Console.Write("\b>");
+
+                }
+            }
+
+
+            Console.SetCursorPosition(0, origY);
 
         }
 
+        /// <summary>
+        /// Gets currencies from api and populates currency list.
+        /// </summary>
         static void GetCurrencies()
         {
             var request = (HttpWebRequest)WebRequest.Create("https://api.exchangeratesapi.io/latest?base=DKK");
@@ -409,6 +487,9 @@ namespace ConsoleApp
 
     }
 
+    /// <summary>
+    /// DTO for json callback from currency api.
+    /// </summary>
     public class CurrencyCallbackObject
     {
 
