@@ -11,7 +11,7 @@ namespace StoreBaeltTicketLibrary
 
         public override double Price()
         {
-            if (Date.DayOfWeek == DayOfWeek.Saturday || Date.DayOfWeek == DayOfWeek.Sunday)
+            if (Date.DayOfWeek == DayOfWeek.Saturday || Date.DayOfWeek == DayOfWeek.Sunday) 
                 return base.Price() * 0.8;
             return base.Price();
         }

@@ -19,9 +19,10 @@ namespace ClassLibraryUnitTesting
 
             //Act
             double price = car.Price();
+            double expected = 192;
 
             //Assert
-            Assert.AreEqual(240, price, 240 * 0.8);
+            Assert.AreEqual(expected, price, expected / 1000);
         }
 
         [TestMethod]
@@ -32,9 +33,10 @@ namespace ClassLibraryUnitTesting
 
             //Act
             double price = car.Price();
+            double expected = 240;
 
             //Assert
-            Assert.AreEqual(240, price);
+            Assert.AreEqual(expected, price);
         }
 
 
@@ -47,10 +49,11 @@ namespace ClassLibraryUnitTesting
             Car car = new Car("WA12343", new DateTime(year, month, day), true);
 
             //Act
-            double price = car.Price();
+            double price = car.PriceAfterBrobizzDiscount();
+            double expected = 182.4;
 
             //Assert
-            Assert.AreEqual(240, price, (240 * 0.8) * 0.95);
+            Assert.AreEqual(expected, price, expected / 1000);
         }
 
         [TestMethod]
@@ -60,10 +63,11 @@ namespace ClassLibraryUnitTesting
             Car car = new Car("WA12343", new DateTime(2020, 9, 11), true);
 
             //Act
-            double price = car.Price();
+            double price = car.PriceAfterBrobizzDiscount();
+            double expected = 228;
 
             //Assert
-            Assert.AreEqual(240, price, 240 * 0.95);
+            Assert.AreEqual(expected, price, expected / 1000);
         }
     }
 }
