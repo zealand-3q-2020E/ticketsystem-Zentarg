@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ClassLibrary;
 
@@ -135,6 +136,21 @@ namespace ClassLibraryUnitTesting
 
             //Assert
             Assert.AreEqual(125, price, 0);
+        }
+
+        [TestMethod]
+        public void TestCustomerTotalTripPrice()
+        {
+            //Arrange
+            Customer customer = new Customer(new List<Vehicle>{new Oresundbron.MC("wa12345", DateTime.Today, false), new Oresundbron.MC("wa12345", DateTime.Today, true) , new MC("wa12345", DateTime.Today, true) , new MC("wa12345", DateTime.Today, false), new StoreBaeltTicketLibrary.Car("wa12345", DateTime.Today, false), new StoreBaeltTicketLibrary.Car("wa12345", DateTime.Today, true) });
+
+            //Act
+            double price = customer.TotalPriceForTrips();
+            double expected = 994.75;
+
+            //Assert
+            Assert.AreEqual(expected, price, expected / 1000);
+
         }
 
 
