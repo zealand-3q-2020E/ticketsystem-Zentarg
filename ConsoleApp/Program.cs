@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Dynamic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using ClassLibrary;
 using Oresundbron;
 using Car = ClassLibrary.Car;
@@ -12,7 +18,9 @@ namespace ConsoleApp
 {
     static class Program
     {
-
+        private static string currencyAPIKey = "22e7777d7ebc8c2b8f248981e4a5de05";
+        private static string currency = "DKK";
+        private static double currencyValue = 1;
 
         static Customer customer = new Customer(new List<Vehicle>());
 
@@ -20,7 +28,9 @@ namespace ConsoleApp
         {
             new KeyValuePair<string, bool>("Buy Ticket", true),
             new KeyValuePair<string, bool>("List Purchases", false),
-            new KeyValuePair<string, bool>("Sum of Purchases", false)
+            new KeyValuePair<string, bool>("Sum of Purchases", false),
+            new KeyValuePair<string, bool>("Choose Currency", false),
+            new KeyValuePair<string, bool>("Exit", false)
         };
 
         static List<KeyValuePair<string, bool>> TicketChoicesList = new List<KeyValuePair<string, bool>>()
@@ -36,6 +46,9 @@ namespace ConsoleApp
             new KeyValuePair<string, bool>("M C", false)
         };
 
+        static List<KeyValuePair<string, bool>> CurrencyChoicesList = new List<KeyValuePair<string, bool>>();
+
+        static Dictionary<string, double> Currencies = new Dictionary<string, double>();
 
         static void Main(string[] args)
         {
@@ -75,6 +88,11 @@ namespace ConsoleApp
                 case "Sum of Purchases":
                     SumPurchases();
                     break;
+                case "Choose Currency":
+                    ChangeCurrency();
+                    break;
+                case "Exit":
+                    return;
             }
         }
 
@@ -198,7 +216,7 @@ namespace ConsoleApp
             Console.WriteLine($"> Ticket Type: {ticketChoice}");
             Console.WriteLine($"> Vehicle Type: {customer.Trips.Last().VehicleType()}");
             Console.WriteLine($"> Date: {date.ToShortDateString()}");
-            Console.WriteLine($"> Price: {customer.Trips.Last().PriceAfterBrobizzDiscount()}");
+            Console.WriteLine($"> Price: {customer.Trips.Last().PriceAfterBrobizzDiscount() * currencyValue} {currency}");
 
             Console.WriteLine($"\r\n Press any key to go back to the main menu.");
             Console.ReadKey();
@@ -274,7 +292,7 @@ namespace ConsoleApp
                 Console.WriteLine($"\r\n> Vehicle type: {trip.VehicleType()}");
                 Console.WriteLine($"> Date: {trip.Date.ToShortDateString()}");
                 Console.WriteLine($"> Brobizz: {trip.BrobizzPresent.ToString()}");
-                Console.WriteLine($"> Price: {trip.PriceAfterBrobizzDiscount()}");
+                Console.WriteLine($"> Price: {trip.PriceAfterBrobizzDiscount() * currencyValue} {currency}");
             }
 
             Console.WriteLine($"\r\n Press any key to go back to the main menu.");
@@ -294,11 +312,42 @@ namespace ConsoleApp
                 sum += trip.PriceAfterBrobizzDiscount();
             }
 
-            Console.WriteLine($"> {sum}");
+            Console.WriteLine($"> {sum * currencyValue} {currency}");
 
             Console.WriteLine($"\r\n Press any key to go back to the main menu.");
             Console.ReadKey();
             MainScreen();
+        }
+
+        static void ChangeCurrency()
+        {
+            Console.WriteLine("\r\n Getting currencies, please wait...");
+            GetCurrencies();
+            CycleChoicesList(CurrencyChoicesList, 0, "Please choose your desired currency:");
+            while (true)
+            {
+                ConsoleKey key = Console.ReadKey().Key;
+                if (key == ConsoleKey.Enter)
+                    break;
+                if (key == ConsoleKey.DownArrow)
+                    CycleChoicesList(CurrencyChoicesList, 1, "Please choose your desired currency: ");
+                else if (key == ConsoleKey.UpArrow)
+                    CycleChoicesList(CurrencyChoicesList, -1, "Please choose your desired currency: ");
+            }
+
+            foreach (KeyValuePair<string, bool> pair in CurrencyChoicesList)
+            {
+                if (pair.Value)
+                    currency = pair.Key;
+            }
+
+            currencyValue = Currencies[currency];
+
+            
+            Console.WriteLine($"\r\n Press any key to go back to the main menu.");
+            Console.ReadKey();
+            MainScreen();
+
         }
 
         static void CycleChoicesList(List<KeyValuePair<string, bool>> list, int direction, string messageToSendBeforeList)
@@ -333,5 +382,47 @@ namespace ConsoleApp
 
         }
 
+        static void GetCurrencies()
+        {
+            var request = (HttpWebRequest)WebRequest.Create("https://api.exchangeratesapi.io/latest?base=DKK");
+
+            request.Method = "GET";
+
+            var response = (HttpWebResponse)request.GetResponse();
+
+            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+            CurrencyCallbackObject cback = JsonSerializer.Deserialize<CurrencyCallbackObject>(responseString);
+
+            Currencies = cback.Rates;
+
+            CurrencyChoicesList.Clear();
+
+            foreach (KeyValuePair<string, double> pair in Currencies)
+            {
+                if (pair.Key == Currencies.First().Key)
+                    CurrencyChoicesList.Add(new KeyValuePair<string, bool>(pair.Key, true));
+                else
+                    CurrencyChoicesList.Add(new KeyValuePair<string, bool>(pair.Key, false));
+            }
+        }
+
     }
+
+    public class CurrencyCallbackObject
+    {
+
+        public CurrencyCallbackObject()
+        {
+            
+        }
+
+        [JsonPropertyName("rates")]
+        public Dictionary<string, double> Rates { get; set; }
+        [JsonPropertyName("base")]
+        public string Base { get; set; }
+        [JsonPropertyName("date")]
+        public string Date { get; set; }
+    }
+
 }
