@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Oresundbron
 {
-    public class Car : ClassLibrary.Car
+    public class Car : ClassLibrary.Vehicle
     {
         public Car(string licensePlate, DateTime date, bool brobizzPresent) : base(licensePlate, date, brobizzPresent)
         {

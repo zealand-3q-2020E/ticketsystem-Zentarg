@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Oresundbron
 {
-    public class MC : ClassLibrary.MC
+    public class MC : ClassLibrary.Vehicle
     {
         public MC(string licensePlate, DateTime date, bool brobizzPresent) : base(licensePlate, date, brobizzPresent)
         {
@@ -24,7 +24,7 @@ namespace Oresundbron
 
         public override string VehicleType()
         {
-            return "Oresund M C";
+            return "Oresund MC";
         }
     }
 }
