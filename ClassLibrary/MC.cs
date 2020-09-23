@@ -11,7 +11,7 @@ namespace ClassLibrary
 
         public override string VehicleType()
         {
-            return "M C";
+            return "MC";
         }
 
         public override double Price()
