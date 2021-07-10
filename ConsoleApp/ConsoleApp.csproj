@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="External DLL\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ClassLibrary">
+      <HintPath>External DLL\ClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Oresundbron">
+      <HintPath>External DLL\Oresundbron.dll</HintPath>
+    </Reference>
+    <Reference Include="StoreBaeltTicketLibrary">
+      <HintPath>External DLL\StoreBaeltTicketLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
